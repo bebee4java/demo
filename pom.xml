@@ -13,13 +13,6 @@
         <module>test</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.0</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -64,6 +57,14 @@
             <url>http://central.maven.org/maven2</url>
         </repository>
         <repository>
+            <id>maven</id>
+            <name>maven</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <url>http://mvnrepository.com/artifact/</url>
+        </repository>
+        <repository>
             <id>maven2</id>
             <name>maven2</name>
             <releases>
@@ -71,14 +72,6 @@
             </releases>
             <url>https://repository.jboss.org/nexus/content/groups/public</url>
         </repository>
-         <repository>
-             <id>maven</id>
-             <name>maven</name>
-             <releases>
-                 <enabled>true</enabled>
-             </releases>
-             <url>http://mvnrepository.com/artifact/</url>
-         </repository>
     </repositories>
 
 </project>
