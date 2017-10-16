@@ -14,7 +14,9 @@ public class TestUnit {
     @Before
     public void before() throws IOException {
         hdfsOperator = new HdfsOperator();
-        hdfsOperator.init("hdfs://192.168.16.197:9000");
+        hdfsOperator.setHa(false);
+        hdfsOperator.setFs_defaultFS("hdfs://192.168.16.197:9000");
+        hdfsOperator.init();
     }
     @After
     public void after(){
@@ -39,7 +41,6 @@ public class TestUnit {
             System.out.println("上传成功");
         }
     }
-
     @Test
     public void testUploadFiles(){
         if (hdfsOperator.uploadFiles("E:\\temp\\test","/sgr")){
@@ -58,5 +59,10 @@ public class TestUnit {
     public void testListFiles() throws IOException {
         List<String> files = hdfsOperator.listFiles("/sgr",false);
         System.out.println(files);
+    }
+
+    @Test
+    public void testReadFile() throws IOException {
+        System.out.println(hdfsOperator.readFile("/sgr/test.seq"));
     }
 }

@@ -1,6 +1,7 @@
 package com.java.hdfs;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
@@ -12,17 +13,59 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sgr on 2017/10/14/014.
  */
 public class HdfsOperator {
-    FileSystem fileSystem;
-    public boolean init(String uri) throws IOException {
+    private FileSystem fileSystem;
+    private boolean isHa;
+    private String fs_defaultFS;
+    private String dfs_nameservices;
+    private String dfs_ha_namenodes;
+    private Map<String,String> dfs_namenode_rpc_address;
+
+    public void setDfs_ha_namenodes(String dfs_ha_namenodes) {
+        this.dfs_ha_namenodes = dfs_ha_namenodes;
+    }
+
+    public void setDfs_namenode_rpc_address(Map<String, String> dfs_namenode_rpc_address) {
+        this.dfs_namenode_rpc_address = dfs_namenode_rpc_address;
+    }
+
+    public void setDfs_nameservices(String dfs_nameservices) {
+        this.dfs_nameservices = dfs_nameservices;
+    }
+
+    public void setFs_defaultFS(String fs_defaultFS) {
+        this.fs_defaultFS = fs_defaultFS;
+    }
+
+    public void setHa(boolean ha) {
+        isHa = ha;
+    }
+
+    public boolean init() throws IOException {
         //加载src目录下的配置文件
         Configuration configuration = new Configuration();
-        fileSystem = FileSystem.get(URI.create(uri),configuration);
-        return fileSystem != null;
+        if (isHa){
+            configuration = new Configuration();
+            configuration.set("fs.defaultFS", fs_defaultFS);
+            configuration.set("dfs.nameservices",dfs_nameservices);
+            configuration.set(StringUtils.join("dfs.ha.namenodes.",dfs_nameservices), dfs_ha_namenodes);
+            for (String namenode : dfs_namenode_rpc_address.keySet()){
+                configuration.set(StringUtils.join("dfs.namenode.rpc-address.",dfs_nameservices,namenode),dfs_namenode_rpc_address.get(namenode));
+            }
+            configuration.set(StringUtils.join("dfs.client.failover.proxy.provider.",dfs_nameservices),
+                    "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider");
+            fileSystem = FileSystem.get(configuration);
+            return fileSystem != null;
+
+        }else {
+            fileSystem = FileSystem.get(URI.create(fs_defaultFS),configuration);
+            return fileSystem != null;
+        }
     }
 
     public void destroy(){
@@ -120,5 +163,24 @@ public class HdfsOperator {
             files.add(fileStatus.getPath().getName());
         }
         return files;
+    }
+
+    public String readFile(String path) throws IOException {
+        Path file = new Path(path);
+        if (file.getName().endsWith(".seq")){
+            SequenceFile.Reader reader = new SequenceFile.Reader(fileSystem,file,new Configuration());
+            Text key = new Text();
+            Text value = new Text();
+            StringBuffer stringBuffer = new StringBuffer();
+            while (reader.next(key,value)){
+                stringBuffer.append(key.toString()).append("\n")
+                        .append(value.toString()).append("-----------------").append("\n");
+            }
+            return stringBuffer.toString();
+        }else {
+            FSDataInputStream inputStream = fileSystem.open(file);
+            return IOUtils.toString(inputStream);
+        }
+
     }
 }
