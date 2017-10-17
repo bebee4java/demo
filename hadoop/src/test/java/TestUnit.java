@@ -1,4 +1,4 @@
-import com.java.hdfs.HdfsOperator;
+import com.java.hadoop.hdfs.HdfsOperator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

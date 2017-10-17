@@ -11,7 +11,7 @@
     <modules>
         <module>commons</module>
         <module>test</module>
-        <module>hdfs</module>
+        <module>hadoop</module>
     </modules>
 
     <dependencies>

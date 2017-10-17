@@ -1,4 +1,4 @@
-package com.java.hdfs;
+package com.java.hadoop.hdfs;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -119,15 +119,23 @@ public class HdfsOperator {
      * @return boolean
      */
     public boolean uploadFiles(String path,String destPath) {
+        SequenceFile.Writer writer = null;
         try {
             File files = new File(path);
             Path name = new Path(StringUtils.join(destPath,"/",files.getName(),".seq"));
-            SequenceFile.Writer writer = SequenceFile.createWriter(fileSystem,new Configuration(), name, Text.class,Text.class);
+            writer = SequenceFile.createWriter(fileSystem,new Configuration(), name, Text.class,Text.class);
             for (File file : files.listFiles()){
                 writer.append(new Text(file.getName()),new Text(FileUtils.readFileToString(file)));
             }
         }catch (IOException e){
             return false;
+        }finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
@@ -140,8 +148,9 @@ public class HdfsOperator {
      */
     public boolean downloadSequenceFile(String srcFile,String destPath){
         Path file = new Path(srcFile);
+        SequenceFile.Reader reader = null;
         try {
-            SequenceFile.Reader reader = new SequenceFile.Reader(fileSystem,file,new Configuration());
+            reader = new SequenceFile.Reader(fileSystem,file,new Configuration());
             Text key = new Text();
             Text value = new Text();
             while (reader.next(key,value)){
@@ -150,6 +159,13 @@ public class HdfsOperator {
             }
         } catch (IOException e) {
             return false;
+        }finally {
+            try {
+                if (reader != null)
+                    reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
@@ -176,6 +192,7 @@ public class HdfsOperator {
                 stringBuffer.append(key.toString()).append("\n")
                         .append(value.toString()).append("-----------------").append("\n");
             }
+            reader.close();//关闭reader流
             return stringBuffer.toString();
         }else {
             FSDataInputStream inputStream = fileSystem.open(file);
