@@ -31,6 +31,9 @@ public class WCJob {
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);
         job.setReducerClass(WCReduce.class);
+        //combiner的工作和reduce一样，可以直接指定到WCReduce，但是这样它走的流程是不一样的，效率会提高
+        job.setCombinerClass(WCReduce.class);
+
         FileInputFormat.addInputPath(job,new Path(""));
 
         Path outPath = new Path("");

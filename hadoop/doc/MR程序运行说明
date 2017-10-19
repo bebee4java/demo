@@ -14,7 +14,7 @@ MR执行环境两种：本地测试环境、服务器环境
     b.代码里使用：
     Configuration config = new  Configuration();
     config.set("fs.defaultFS", "hdfs://node1:8020");//active状态的NN
-    config.set("yarn.resourcemanager.hostname", "lida1");//active状态的RSM
+    config.set("yarn.resourcemanager.hostname", "node2");//active状态的RSM
 二、服务器环境
 1、在本地直接调用MR，执行MR的过程在服务器上（真正企业运行环境）
       （1）在src下放置服务器上的hadoop配置文件
