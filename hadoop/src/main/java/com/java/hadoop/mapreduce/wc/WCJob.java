@@ -24,6 +24,11 @@ public class WCJob {
         System.setProperty("HADOOP_USER_NAME","sgr");
 
         Configuration configuration = new Configuration();
+        /*configuration.set("fs.defaultFS", "hdfs://node1:8020");//active状态的NN
+        configuration.set("yarn.resourcemanager.hostname", "node2");//active状态的RSM*/
+
+        configuration.set("mapred.jar","E:\\Projects\\demo\\out\\artifacts\\wc_jar\\wc.jar");
+
         FileSystem fileSystem = FileSystem.get(configuration);
         Job job = Job.getInstance(configuration);
         job.setJarByClass(WCJob.class);
@@ -34,9 +39,9 @@ public class WCJob {
         //combiner的工作和reduce一样，可以直接指定到WCReduce，但是这样它走的流程是不一样的，效率会提高
         job.setCombinerClass(WCReduce.class);
 
-        FileInputFormat.addInputPath(job,new Path(""));
+        FileInputFormat.addInputPath(job,new Path("/sgr/wc/input"));
 
-        Path outPath = new Path("");
+        Path outPath = new Path("/sgr/wc/output");
         //如果存在先删除，保证MR程序正常
         if (fileSystem.exists(outPath)){
             fileSystem.delete(outPath,true);

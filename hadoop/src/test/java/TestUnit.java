@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sgr on 2017/10/14/014.
@@ -14,8 +16,17 @@ public class TestUnit {
     @Before
     public void before() throws IOException {
         hdfsOperator = new HdfsOperator();
-        hdfsOperator.setHa(false);
-        hdfsOperator.setFs_defaultFS("hdfs://192.168.16.197:9000");
+        /*hdfsOperator.setHa(false);
+        hdfsOperator.setFs_defaultFS("hdfs://192.168.16.197:9000");*/
+
+        hdfsOperator.setHa(true);
+        hdfsOperator.setFs_defaultFS("hdfs://nameservices");
+        hdfsOperator.setDfs_ha_namenodes("namenode197,namenode161");
+        hdfsOperator.setDfs_nameservices("nameservices");
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("namenode197","node1:8020");
+        map.put("namenode161","node2:8020");
+        hdfsOperator.setDfs_namenode_rpc_address(map);
         hdfsOperator.init();
     }
     @After
@@ -25,19 +36,19 @@ public class TestUnit {
 
     @Test
     public void testMkdir() throws IOException {
-        if (hdfsOperator.mkdir("/ss")){
+        if (hdfsOperator.mkdir("/sgr/wc/output")){
             System.out.println("创建成功");
         }
     }
     @Test
     public void testDeleteDir(){
-        if (hdfsOperator.deleteDir("/sgr/test",false)){
+        if (hdfsOperator.deleteDir("/ss",false)){
             System.out.println("删除成功");
         }
     }
     @Test
     public void testUploadFile(){
-        if (hdfsOperator.uploadFile("E:\\temp\\test.txt","/sgr")){
+        if (hdfsOperator.uploadFile("E:\\Projects\\demo\\hadoop\\data\\wc","/sgr/wc/input")){
             System.out.println("上传成功");
         }
     }

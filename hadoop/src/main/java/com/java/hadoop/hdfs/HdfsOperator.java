@@ -55,7 +55,7 @@ public class HdfsOperator {
             configuration.set("dfs.nameservices",dfs_nameservices);
             configuration.set(StringUtils.join("dfs.ha.namenodes.",dfs_nameservices), dfs_ha_namenodes);
             for (String namenode : dfs_namenode_rpc_address.keySet()){
-                configuration.set(StringUtils.join("dfs.namenode.rpc-address.",dfs_nameservices,namenode),dfs_namenode_rpc_address.get(namenode));
+                configuration.set(StringUtils.join("dfs.namenode.rpc-address.",dfs_nameservices,".",namenode),dfs_namenode_rpc_address.get(namenode));
             }
             configuration.set(StringUtils.join("dfs.client.failover.proxy.provider.",dfs_nameservices),
                     "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider");

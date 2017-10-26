@@ -18,11 +18,11 @@ MR执行环境两种：本地测试环境、服务器环境
 二、服务器环境
 1、在本地直接调用MR，执行MR的过程在服务器上（真正企业运行环境）
       （1）在src下放置服务器上的hadoop配置文件
-      （2）从源码中拷贝 org.apache.hadoop.mapred.YRANRunner.java到我们的mr的src目录下
+      （2）从源码中拷贝 org.apache.hadoop.mapred.YARNRunner.java到我们的mr的src目录下
       （3）把MR程序打包（jar），直接放到本地：增加属性：config.set("mapred.jar","D:\\wc.jar")
       （4）本地执行main方法，servlet调用MR。
 2、直接在服务器上使用命令的方式调用MR程序，执行过程也在服务器上
       （1）在src下放置服务器上的hadoop配置文件
       （2）把MR程序打包（jar），传送到服务器上
-      （3）通过命令：hadoop jar jar路径  类的全限定名 例如：hadoop jar /examples/wc.jar
+      （3）通过命令：hadoop jar jar路径  类的全路径名 例如：hadoop jar /examples/wc.jar
 
