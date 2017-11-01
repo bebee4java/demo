@@ -21,11 +21,11 @@ public class TestUnit {
 
         hdfsOperator.setHa(true);
         hdfsOperator.setFs_defaultFS("hdfs://nameservices");
-        hdfsOperator.setDfs_ha_namenodes("namenode197,namenode161");
+        hdfsOperator.setDfs_ha_namenodes("namenode232,namenode199");
         hdfsOperator.setDfs_nameservices("nameservices");
         Map<String,String> map = new HashMap<String, String>();
-        map.put("namenode197","node1:8020");
-        map.put("namenode161","node2:8020");
+        map.put("namenode232","node1:8020");
+        map.put("namenode199","node2:8020");
         hdfsOperator.setDfs_namenode_rpc_address(map);
         hdfsOperator.init();
     }
@@ -36,7 +36,7 @@ public class TestUnit {
 
     @Test
     public void testMkdir() throws IOException {
-        if (hdfsOperator.mkdir("/sgr/wc/output")){
+        if (hdfsOperator.mkdir("/sgr/wc/input")){
             System.out.println("创建成功");
         }
     }
@@ -48,7 +48,7 @@ public class TestUnit {
     }
     @Test
     public void testUploadFile(){
-        if (hdfsOperator.uploadFile("E:\\Projects\\demo\\hadoop\\data\\wc","/sgr/wc/input")){
+        if (hdfsOperator.uploadFile("E:\\Project\\demo\\hadoop\\data\\wc","/sgr/wc/input")){
             System.out.println("上传成功");
         }
     }

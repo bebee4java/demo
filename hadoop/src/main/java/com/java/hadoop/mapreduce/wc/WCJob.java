@@ -24,10 +24,10 @@ public class WCJob {
         System.setProperty("HADOOP_USER_NAME","sgr");
 
         Configuration configuration = new Configuration();
-        /*configuration.set("fs.defaultFS", "hdfs://node1:8020");//active状态的NN
-        configuration.set("yarn.resourcemanager.hostname", "node2");//active状态的RSM*/
+        configuration.set("fs.defaultFS", "hdfs://node2:8020");//active状态的NN
+        configuration.set("yarn.resourcemanager.hostname", "node2");//active状态的RSM
 
-        configuration.set("mapred.jar","E:\\Projects\\demo\\out\\artifacts\\wc_jar\\wc.jar");
+//        configuration.set("mapred.jar","E:\\Projects\\demo\\out\\artifacts\\wc_jar\\wc.jar");
 
         FileSystem fileSystem = FileSystem.get(configuration);
         Job job = Job.getInstance(configuration);
