@@ -103,6 +103,9 @@ public class HbaseClientTest {
         }
     }
     @Test
+    /**
+     * 查询某个号码所有主叫的通话详单（type=0）
+     */
     public void ScanTableWithFilter() throws IOException {
         List<MyCell> cellList = null;
         cellList = hbaseClient.scanTableWithFilter(

@@ -78,7 +78,7 @@ public class HbaseClient {
     }
 
     public void insert(String rowKey, String cf, Map<String,String> cloumns) throws IOException {
-        Put put = new Put(rowKey.getBytes());
+        Put put = new Put(rowKey.getBytes());//rowKey长度有限制（64kb）
         for (Map.Entry<String,String> entry : cloumns.entrySet()){
             String cloumnName = entry.getKey();
             String cloumnValue = entry.getValue();
@@ -206,6 +206,15 @@ public class HbaseClient {
         }
     }
 
+    /**
+     * 通过过滤器查询数据
+     * 过滤器的效率并不高，主要的业务过滤放在rowKey中
+     * @param filterList 过滤器
+     * @param cf 列族
+     * @param cloumnNames 列名
+     * @return
+     * @throws IOException
+     */
     public List<MyCell> scanTableWithFilter(FilterList filterList,String cf, String... cloumnNames) throws IOException {
         Scan scan = new Scan();
         scan.setFilter(filterList);
