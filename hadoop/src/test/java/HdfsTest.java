@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by sgr on 2017/10/14/014.
  */
-public class TestUnit {
+public class HdfsTest {
     HdfsOperator hdfsOperator;
     @Before
     public void before() throws IOException {
