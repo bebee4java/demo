@@ -1,5 +1,6 @@
 import com.java.hadoop.hbase.HbaseClient;
 import com.java.hadoop.hbase.MyCell;
+import com.java.hadoop.hbase.Ticket;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class HbaseClientTest {
 
     @Before
     public void before(){
-        hbaseClient = new HbaseClient("ticket");
+        hbaseClient = new HbaseClient("ticket1");
         boolean init = hbaseClient.init();
         if (init){
             System.out.println("hbaseClient init succeed!");
@@ -43,7 +44,7 @@ public class HbaseClientTest {
         String time = randomDate(2017);
         String rowKey = number + "_" + time;
         String cf = "cf1";
-        Map<String,String> columnMap = new HashMap<String, String>();
+        Map<String,Object> columnMap = new HashMap<String, Object>();
         columnMap.put("type", "0");
         columnMap.put("dialNumber", randomNumber("182"));
         columnMap.put("time", time);
@@ -78,6 +79,37 @@ public class HbaseClientTest {
         hbaseClient.insertBatch(cellList);
     }
 
+    /**
+     * 使用protobuf将数据序列化后存入Hbase,以减少存储
+     * @throws ParseException
+     * @throws IOException
+     */
+    @Test
+    public void porotobufIn2Table() throws ParseException, IOException {
+        for (int i=0; i<10; i++){
+            String number = randomNumber("186");
+            String timeStr = randomDate(2017,10,1);
+            Date date = DATE_FORMAT.parse(timeStr);
+            long t = Long.MAX_VALUE - date.getTime();//按时间降序排序
+            String rowKey = number + "_" + t;
+
+            Ticket.dticket.Builder dticket = Ticket.dticket.newBuilder();
+
+            for (int j=0; j<100; j++){
+                Ticket.ticket.Builder ticket = Ticket.ticket.newBuilder();
+                ticket.setDialNumber(randomNumber("181"));
+                ticket.setTime(timeStr);
+                ticket.setType(new Random().nextInt(2)+"");
+
+                dticket.addTicklist(ticket);
+            }
+            Map<String,Object> map = new HashMap<String,Object>();
+            map.put("dticket",dticket.build());
+            hbaseClient.insert(rowKey,"cf1",map);
+
+
+        }
+    }
     @Test
     public void getTable() throws IOException {
         String rowKey = "18373300853_20170826192139";
@@ -85,6 +117,26 @@ public class HbaseClientTest {
         List<MyCell> cellList = hbaseClient.get(rowKey,cf,"dialNumber","type","time");
         for (MyCell myCell : cellList)
             System.out.println(myCell);
+    }
+
+    @Test
+    public void getTableProtobufData() throws IOException {
+        String rowKey = "1861631484_9223370527365891807";
+        String cf = "cf1";
+        List<MyCell> cellList = hbaseClient.get(rowKey,cf,"dticket");
+        for (MyCell myCell : cellList){
+            String rk = myCell.getRowKey();
+            Object o = myCell.getCloumnValue();
+            if (o instanceof Ticket.dticket){
+                Ticket.dticket dticket = (Ticket.dticket) o;
+                List<Ticket.ticket> tickets = dticket.getTicklistList();
+                for (Ticket.ticket ticket : tickets){
+                    String s = ticket.getType() + "|" + ticket.getDialNumber() + "|" + ticket.getTime();
+                    System.out.println(s);
+                }
+
+            }
+        }
     }
 
     @Test
@@ -127,7 +179,7 @@ public class HbaseClientTest {
 
 
     public String randomNumber(String preNumber){
-        return preNumber + new Random().nextInt(99999999);
+        return preNumber + String.format("%d", new Integer ((int)((Math.random() * 9 + 1) * 10000000)));
     }
 
     public String randomDate(int year){
@@ -143,17 +195,26 @@ public class HbaseClientTest {
         return DATE_FORMAT.format(date);
     }
 
+    public String randomDate(int year,int month,int day){
+        Random random = new Random();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month-1, day,0,0,0);
+        calendar.add(Calendar.HOUR_OF_DAY, random.nextInt(24));
+        calendar.add(Calendar.MINUTE, random.nextInt(60));
+        calendar.add(Calendar.SECOND, random.nextInt(60));
+        Date date = calendar.getTime();
+        return DATE_FORMAT.format(date);
+    }
+
     @Test
     public void Test() throws ParseException {
         String number = randomNumber("183");
         System.out.println(number);
         String time = randomDate(2017);
         System.out.println(time);
-        Date date = DATE_FORMAT.parse(time);
-        System.out.println();
-        String s = "rowKey:999999";
-        String[] ss = s.split("rowKey:");
-        System.out.println(ss);
+        for (int i=0; i<100; i++){
+            System.out.println(randomNumber("181"));
+        }
     }
 
 }

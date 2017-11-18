@@ -6,18 +6,12 @@ package com.java.hadoop.hbase;
 public final class Ticket {
   private Ticket() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface ticketOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.java.hadoop.hbase.ticket)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ticketOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required string type = 1;
     /**
      * <code>required string type = 1;</code>
      */
@@ -32,6 +26,7 @@ public final class Ticket {
     com.google.protobuf.ByteString
         getTypeBytes();
 
+    // required string time = 2;
     /**
      * <code>required string time = 2;</code>
      */
@@ -46,6 +41,7 @@ public final class Ticket {
     com.google.protobuf.ByteString
         getTimeBytes();
 
+    // required string dialNumber = 3;
     /**
      * <code>required string dialNumber = 3;</code>
      */
@@ -63,34 +59,36 @@ public final class Ticket {
   /**
    * Protobuf type {@code com.java.hadoop.hbase.ticket}
    */
-  public  static final class ticket extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.java.hadoop.hbase.ticket)
-      ticketOrBuilder {
-  private static final long serialVersionUID = 0L;
+  public static final class ticket extends
+      com.google.protobuf.GeneratedMessage
+      implements ticketOrBuilder {
     // Use ticket.newBuilder() to construct.
-    private ticket(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private ticket(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private ticket() {
-      type_ = "";
-      time_ = "";
-      dialNumber_ = "";
+    private ticket(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ticket defaultInstance;
+    public static ticket getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public ticket getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private ticket(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new NullPointerException();
-      }
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -103,28 +101,25 @@ public final class Ticket {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              type_ = bs;
+              type_ = input.readBytes();
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              time_ = bs;
+              time_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              dialNumber_ = bs;
+              dialNumber_ = input.readBytes();
               break;
             }
           }
@@ -133,7 +128,7 @@ public final class Ticket {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -144,16 +139,32 @@ public final class Ticket {
       return Ticket.internal_static_com_java_hadoop_hbase_ticket_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return Ticket.internal_static_com_java_hadoop_hbase_ticket_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               ticket.class, Builder.class);
     }
 
+    public static com.google.protobuf.Parser<ticket> PARSER =
+        new com.google.protobuf.AbstractParser<ticket>() {
+      public ticket parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ticket(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<ticket> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // required string type = 1;
     public static final int TYPE_FIELD_NUMBER = 1;
-    private volatile Object type_;
+    private Object type_;
     /**
      * <code>required string type = 1;</code>
      */
@@ -194,8 +205,9 @@ public final class Ticket {
       }
     }
 
+    // required string time = 2;
     public static final int TIME_FIELD_NUMBER = 2;
-    private volatile Object time_;
+    private Object time_;
     /**
      * <code>required string time = 2;</code>
      */
@@ -236,8 +248,9 @@ public final class Ticket {
       }
     }
 
+    // required string dialNumber = 3;
     public static final int DIALNUMBER_FIELD_NUMBER = 3;
-    private volatile Object dialNumber_;
+    private Object dialNumber_;
     /**
      * <code>required string dialNumber = 3;</code>
      */
@@ -278,11 +291,15 @@ public final class Ticket {
       }
     }
 
+    private void initFields() {
+      type_ = "";
+      time_ = "";
+      dialNumber_ = "";
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasType()) {
         memoizedIsInitialized = 0;
@@ -302,102 +319,49 @@ public final class Ticket {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
+        output.writeBytes(1, getTypeBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, time_);
+        output.writeBytes(2, getTimeBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, dialNumber_);
+        output.writeBytes(3, getDialNumberBytes());
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getTypeBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, time_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getTimeBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, dialNumber_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getDialNumberBytes());
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @Override
-    public boolean equals(final Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof ticket)) {
-        return super.equals(obj);
-      }
-      ticket other = (ticket) obj;
-
-      boolean result = true;
-      result = result && (hasType() == other.hasType());
-      if (hasType()) {
-        result = result && getType()
-            .equals(other.getType());
-      }
-      result = result && (hasTime() == other.hasTime());
-      if (hasTime()) {
-        result = result && getTime()
-            .equals(other.getTime());
-      }
-      result = result && (hasDialNumber() == other.hasDialNumber());
-      if (hasDialNumber()) {
-        result = result && getDialNumber()
-            .equals(other.getDialNumber());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
     }
 
-    @Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasType()) {
-        hash = (37 * hash) + TYPE_FIELD_NUMBER;
-        hash = (53 * hash) + getType().hashCode();
-      }
-      if (hasTime()) {
-        hash = (37 * hash) + TIME_FIELD_NUMBER;
-        hash = (53 * hash) + getTime().hashCode();
-      }
-      if (hasDialNumber()) {
-        hash = (37 * hash) + DIALNUMBER_FIELD_NUMBER;
-        hash = (53 * hash) + getDialNumber().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static ticket parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static ticket parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static ticket parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -421,57 +385,46 @@ public final class Ticket {
     }
     public static ticket parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static ticket parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static ticket parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static ticket parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static ticket parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static ticket parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(ticket prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -479,15 +432,14 @@ public final class Ticket {
      * Protobuf type {@code com.java.hadoop.hbase.ticket}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.java.hadoop.hbase.ticket)
-        ticketOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements ticketOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return Ticket.internal_static_com_java_hadoop_hbase_ticket_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return Ticket.internal_static_com_java_hadoop_hbase_ticket_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -500,15 +452,18 @@ public final class Ticket {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         type_ = "";
@@ -518,6 +473,10 @@ public final class Ticket {
         dialNumber_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -558,32 +517,6 @@ public final class Ticket {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof ticket) {
           return mergeFrom((ticket)other);
@@ -610,19 +543,21 @@ public final class Ticket {
           dialNumber_ = other.dialNumber_;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasType()) {
+          
           return false;
         }
         if (!hasTime()) {
+          
           return false;
         }
         if (!hasDialNumber()) {
+          
           return false;
         }
         return true;
@@ -637,7 +572,7 @@ public final class Ticket {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (ticket) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -647,6 +582,7 @@ public final class Ticket {
       }
       private int bitField0_;
 
+      // required string type = 1;
       private Object type_ = "";
       /**
        * <code>required string type = 1;</code>
@@ -660,12 +596,9 @@ public final class Ticket {
       public String getType() {
         Object ref = type_;
         if (!(ref instanceof String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            type_ = s;
-          }
+          String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          type_ = s;
           return s;
         } else {
           return (String) ref;
@@ -723,6 +656,7 @@ public final class Ticket {
         return this;
       }
 
+      // required string time = 2;
       private Object time_ = "";
       /**
        * <code>required string time = 2;</code>
@@ -736,12 +670,9 @@ public final class Ticket {
       public String getTime() {
         Object ref = time_;
         if (!(ref instanceof String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            time_ = s;
-          }
+          String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          time_ = s;
           return s;
         } else {
           return (String) ref;
@@ -799,6 +730,7 @@ public final class Ticket {
         return this;
       }
 
+      // required string dialNumber = 3;
       private Object dialNumber_ = "";
       /**
        * <code>required string dialNumber = 3;</code>
@@ -812,12 +744,9 @@ public final class Ticket {
       public String getDialNumber() {
         Object ref = dialNumber_;
         if (!(ref instanceof String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            dialNumber_ = s;
-          }
+          String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          dialNumber_ = s;
           return s;
         } else {
           return (String) ref;
@@ -874,59 +803,22 @@ public final class Ticket {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:com.java.hadoop.hbase.ticket)
     }
 
-    // @@protoc_insertion_point(class_scope:com.java.hadoop.hbase.ticket)
-    private static final ticket DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new ticket();
+      defaultInstance = new ticket(true);
+      defaultInstance.initFields();
     }
 
-    public static ticket getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @Deprecated public static final com.google.protobuf.Parser<ticket>
-        PARSER = new com.google.protobuf.AbstractParser<ticket>() {
-      public ticket parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ticket(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ticket> parser() {
-      return PARSER;
-    }
-
-    @Override
-    public com.google.protobuf.Parser<ticket> getParserForType() {
-      return PARSER;
-    }
-
-    public ticket getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:com.java.hadoop.hbase.ticket)
   }
 
-  public interface dticketOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.java.hadoop.hbase.dticket)
-      com.google.protobuf.MessageOrBuilder {
+  public interface dticketOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // repeated .com.java.hadoop.hbase.ticket ticklist = 1;
     /**
      * <code>repeated .com.java.hadoop.hbase.ticket ticklist = 1;</code>
      */
@@ -954,32 +846,36 @@ public final class Ticket {
   /**
    * Protobuf type {@code com.java.hadoop.hbase.dticket}
    */
-  public  static final class dticket extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.java.hadoop.hbase.dticket)
-      dticketOrBuilder {
-  private static final long serialVersionUID = 0L;
+  public static final class dticket extends
+      com.google.protobuf.GeneratedMessage
+      implements dticketOrBuilder {
     // Use dticket.newBuilder() to construct.
-    private dticket(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private dticket(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private dticket() {
-      ticklist_ = java.util.Collections.emptyList();
+    private dticket(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final dticket defaultInstance;
+    public static dticket getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public dticket getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private dticket(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new NullPointerException();
-      }
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -992,8 +888,8 @@ public final class Ticket {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1003,8 +899,7 @@ public final class Ticket {
                 ticklist_ = new java.util.ArrayList<ticket>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              ticklist_.add(
-                  input.readMessage(ticket.PARSER, extensionRegistry));
+              ticklist_.add(input.readMessage(ticket.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1013,7 +908,7 @@ public final class Ticket {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           ticklist_ = java.util.Collections.unmodifiableList(ticklist_);
@@ -1027,13 +922,29 @@ public final class Ticket {
       return Ticket.internal_static_com_java_hadoop_hbase_dticket_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return Ticket.internal_static_com_java_hadoop_hbase_dticket_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               dticket.class, Builder.class);
     }
 
+    public static com.google.protobuf.Parser<dticket> PARSER =
+        new com.google.protobuf.AbstractParser<dticket>() {
+      public dticket parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new dticket(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<dticket> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .com.java.hadoop.hbase.ticket ticklist = 1;
     public static final int TICKLIST_FIELD_NUMBER = 1;
     private java.util.List<ticket> ticklist_;
     /**
@@ -1069,11 +980,13 @@ public final class Ticket {
       return ticklist_.get(index);
     }
 
+    private void initFields() {
+      ticklist_ = java.util.Collections.emptyList();
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       for (int i = 0; i < getTicklistCount(); i++) {
         if (!getTicklist(i).isInitialized()) {
@@ -1087,14 +1000,16 @@ public final class Ticket {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       for (int i = 0; i < ticklist_.size(); i++) {
         output.writeMessage(1, ticklist_.get(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -1102,55 +1017,18 @@ public final class Ticket {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, ticklist_.get(i));
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @Override
-    public boolean equals(final Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof dticket)) {
-        return super.equals(obj);
-      }
-      dticket other = (dticket) obj;
-
-      boolean result = true;
-      result = result && getTicklistList()
-          .equals(other.getTicklistList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
     }
 
-    @Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getTicklistCount() > 0) {
-        hash = (37 * hash) + TICKLIST_FIELD_NUMBER;
-        hash = (53 * hash) + getTicklistList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static dticket parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dticket parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static dticket parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1174,57 +1052,46 @@ public final class Ticket {
     }
     public static dticket parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static dticket parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static dticket parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static dticket parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static dticket parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static dticket parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(dticket prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1232,15 +1099,14 @@ public final class Ticket {
      * Protobuf type {@code com.java.hadoop.hbase.dticket}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.java.hadoop.hbase.dticket)
-        dticketOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements dticketOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return Ticket.internal_static_com_java_hadoop_hbase_dticket_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return Ticket.internal_static_com_java_hadoop_hbase_dticket_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1253,16 +1119,19 @@ public final class Ticket {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getTicklistFieldBuilder();
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         if (ticklistBuilder_ == null) {
@@ -1272,6 +1141,10 @@ public final class Ticket {
           ticklistBuilder_.clear();
         }
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -1307,32 +1180,6 @@ public final class Ticket {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof dticket) {
           return mergeFrom((dticket)other);
@@ -1363,21 +1210,21 @@ public final class Ticket {
               ticklist_ = other.ticklist_;
               bitField0_ = (bitField0_ & ~0x00000001);
               ticklistBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTicklistFieldBuilder() : null;
             } else {
               ticklistBuilder_.addAllMessages(other.ticklist_);
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         for (int i = 0; i < getTicklistCount(); i++) {
           if (!getTicklist(i).isInitialized()) {
+            
             return false;
           }
         }
@@ -1393,7 +1240,7 @@ public final class Ticket {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (dticket) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1403,6 +1250,7 @@ public final class Ticket {
       }
       private int bitField0_;
 
+      // repeated .com.java.hadoop.hbase.ticket ticklist = 1;
       private java.util.List<ticket> ticklist_ =
         java.util.Collections.emptyList();
       private void ensureTicklistIsMutable() {
@@ -1412,7 +1260,7 @@ public final class Ticket {
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           ticket, ticket.Builder, ticketOrBuilder> ticklistBuilder_;
 
       /**
@@ -1544,8 +1392,7 @@ public final class Ticket {
           Iterable<? extends ticket> values) {
         if (ticklistBuilder_ == null) {
           ensureTicklistIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, ticklist_);
+          super.addAll(values, ticklist_);
           onChanged();
         } else {
           ticklistBuilder_.addAllMessages(values);
@@ -1628,11 +1475,11 @@ public final class Ticket {
            getTicklistBuilderList() {
         return getTicklistFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           ticket, ticket.Builder, ticketOrBuilder>
           getTicklistFieldBuilder() {
         if (ticklistBuilder_ == null) {
-          ticklistBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          ticklistBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               ticket, ticket.Builder, ticketOrBuilder>(
                   ticklist_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
@@ -1642,71 +1489,34 @@ public final class Ticket {
         }
         return ticklistBuilder_;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:com.java.hadoop.hbase.dticket)
     }
 
-    // @@protoc_insertion_point(class_scope:com.java.hadoop.hbase.dticket)
-    private static final dticket DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new dticket();
+      defaultInstance = new dticket(true);
+      defaultInstance.initFields();
     }
 
-    public static dticket getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @Deprecated public static final com.google.protobuf.Parser<dticket>
-        PARSER = new com.google.protobuf.AbstractParser<dticket>() {
-      public dticket parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new dticket(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<dticket> parser() {
-      return PARSER;
-    }
-
-    @Override
-    public com.google.protobuf.Parser<dticket> getParserForType() {
-      return PARSER;
-    }
-
-    public dticket getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:com.java.hadoop.hbase.dticket)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_java_hadoop_hbase_ticket_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_java_hadoop_hbase_ticket_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_java_hadoop_hbase_dticket_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_java_hadoop_hbase_dticket_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     String[] descriptorData = {
@@ -1716,29 +1526,29 @@ public final class Ticket {
       " \003(\0132\035.com.java.hadoop.hbase.ticket"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_java_hadoop_hbase_ticket_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_java_hadoop_hbase_ticket_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_java_hadoop_hbase_ticket_descriptor,
+              new String[] { "Type", "Time", "DialNumber", });
+          internal_static_com_java_hadoop_hbase_dticket_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_java_hadoop_hbase_dticket_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_java_hadoop_hbase_dticket_descriptor,
+              new String[] { "Ticklist", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_com_java_hadoop_hbase_ticket_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_java_hadoop_hbase_ticket_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_java_hadoop_hbase_ticket_descriptor,
-        new String[] { "Type", "Time", "DialNumber", });
-    internal_static_com_java_hadoop_hbase_dticket_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_java_hadoop_hbase_dticket_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_java_hadoop_hbase_dticket_descriptor,
-        new String[] { "Ticklist", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

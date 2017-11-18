@@ -10,7 +10,7 @@ import org.apache.hadoop.hbase.filter.PrefixFilter;
 import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.util.Triple;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,12 +77,44 @@ public class HbaseClient {
         return true;
     }
 
-    public void insert(String rowKey, String cf, Map<String,String> cloumns) throws IOException {
+    public byte[] toByteArray (Object obj) {
+        byte[] bytes = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(obj);
+            oos.flush();
+            bytes = bos.toByteArray ();
+            oos.close();
+            bos.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return bytes;
+    }
+
+    public Object toObject (byte[] bytes) {
+        Object obj = null;
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+            ObjectInputStream ois = new ObjectInputStream (bis);
+            obj = ois.readObject();
+            ois.close();
+            bis.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return obj;
+    }
+
+    public void insert(String rowKey, String cf, Map<String,Object> cloumns) throws IOException {
         Put put = new Put(rowKey.getBytes());//rowKey长度有限制（64kb）
-        for (Map.Entry<String,String> entry : cloumns.entrySet()){
+        for (Map.Entry<String,Object> entry : cloumns.entrySet()){
             String cloumnName = entry.getKey();
-            String cloumnValue = entry.getValue();
-            put.addColumn(cf.getBytes(),cloumnName.getBytes(),cloumnValue.getBytes());
+            Object cloumnValue = entry.getValue();
+            put.addColumn(cf.getBytes(),cloumnName.getBytes(), toByteArray(cloumnValue));
         }
         hTable.put(put);
     }
@@ -96,17 +128,17 @@ public class HbaseClient {
             String row = myCell.getRowKey();
             String cf = myCell.getCf();
             String columnName = myCell.getCloumnName();
-            String columnValue = myCell.getCloumnValue();
+            Object columnValue = myCell.getCloumnValue();
             if (row.equals(rowKey)){
                 //同一行
-                put.addColumn(cf.getBytes(),columnName.getBytes(),columnValue.getBytes());
+                put.addColumn(cf.getBytes(),columnName.getBytes(),toByteArray(columnValue));
             }else {
                 if (!first){
                    putList.add(put);
                 }
                 //下一行
                 put = new Put(row.getBytes());
-                put.addColumn(cf.getBytes(),columnName.getBytes(),columnValue.getBytes());
+                put.addColumn(cf.getBytes(),columnName.getBytes(),toByteArray(columnValue));
                 if (first){
                     first = false;
                 }
@@ -129,7 +161,7 @@ public class HbaseClient {
         List<MyCell> cellList = new ArrayList<MyCell>(result.size());
         for (String cloumnName : cloumnNames){
             Cell cell = result.getColumnLatestCell(cf.getBytes(),cloumnName.getBytes());
-            MyCell myCell = new MyCell(rowKey,cf,cloumnName,new String(CellUtil.cloneValue(cell)));
+            MyCell myCell = new MyCell(rowKey,cf,cloumnName,toObject(CellUtil.cloneValue(cell)));
             cellList.add(myCell);
         }
         return cellList;
