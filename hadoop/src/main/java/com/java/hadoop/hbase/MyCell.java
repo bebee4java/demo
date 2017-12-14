@@ -11,13 +11,13 @@ public class MyCell {
     //列名
     private String cloumnName;
     //值
-    private String cloumnValue;
+    private Object cloumnValue;
 
     public String getRowKey() {
         return rowKey;
     }
 
-    public MyCell(String rowKey, String cf, String cloumnName, String cloumnValue){
+    public MyCell(String rowKey, String cf, String cloumnName, Object cloumnValue){
         this.rowKey = rowKey;
         this.cf = cf;
         this.cloumnName = cloumnName;
@@ -44,11 +44,11 @@ public class MyCell {
         this.cloumnName = cloumnName;
     }
 
-    public String getCloumnValue() {
+    public Object getCloumnValue() {
         return cloumnValue;
     }
 
-    public void setCloumnValue(String cloumnValue) {
+    public void setCloumnValue(Object cloumnValue) {
         this.cloumnValue = cloumnValue;
     }
 
