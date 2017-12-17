@@ -12,7 +12,8 @@
         <module>commons</module>
         <module>test</module>
         <module>hadoop</module>
-        <module>spark</module>
+        <module>spark-java</module>
+        <module>spark-scala</module>
     </modules>
 
     <dependencies>
