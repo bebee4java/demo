@@ -12,9 +12,12 @@ public class SparkTest_Lines {
         SparkConf conf = new SparkConf().setMaster("local").setAppName("SparkTest_Lines");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        JavaRDD rdd = sc.textFile("data_160w.csv");
+        long start1 = System.currentTimeMillis();
+        JavaRDD rdd = sc.textFile("spark/src/data_160w.csv");
         long count = rdd.count();
         System.out.println(count);
+        long end1 = System.currentTimeMillis();
+        System.out.println("cost: " + (end1-start1));
         sc.close();
     }
 }
