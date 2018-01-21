@@ -23,6 +23,7 @@ public class MapOperator {
         JavaRDD<Integer> result = javaRDD.map(new Function<Integer, Integer>() {
             @Override
             public Integer call(Integer number) throws Exception {
+                System.out.println("exec call...");
                 return number * 10;
             }
         });
@@ -30,8 +31,10 @@ public class MapOperator {
         result.foreach(new VoidFunction<Integer>() {
             @Override
             public void call(Integer number) throws Exception {
-                System.out.println(number);
+                System.out.println(number);//在集群worker上执行
             }
         });
+
+        sparkContext.close();
     }
 }

@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class MapPartitionsOperator {
     public static void main(String[] args) {
-        SparkConf sparkConf = new SparkConf().setAppName("MapPartitionsOperator").setMaster("local[2]");
+        SparkConf sparkConf = new SparkConf().setAppName("MapPartitionsOperator").setMaster("local[1]");
         JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 
         List<String> names = Arrays.asList("zhangsan","lisi","wangwu");
@@ -35,6 +35,7 @@ public class MapPartitionsOperator {
         JavaRDD<Integer> scoresRdd = javaRDD.mapPartitions(new FlatMapFunction<Iterator<String>, Integer>() {
             @Override
             public Iterator<Integer> call(Iterator<String> names) throws Exception {
+                System.out.println("exec call...");
                 List<Integer> list = new ArrayList<Integer>();
                 while (names.hasNext()){
                     String name = names.next();
@@ -51,6 +52,8 @@ public class MapPartitionsOperator {
                 System.out.println(score);
             }
         });
+
+        sparkContext.close();
 
     }
 }
