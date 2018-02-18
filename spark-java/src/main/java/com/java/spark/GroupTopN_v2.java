@@ -38,8 +38,8 @@ public class GroupTopN_v2 {
                 Iterator<Integer> iterator = tuple2._2.iterator();
                 while (iterator.hasNext()){
                     Integer t = iterator.next();
-                    for (int i=temp.length-1; i< temp.length; i++){
-                        if (i>=1 && t > temp[i-1]){
+                    for (int i=temp.length-1; i>=0; i--){
+                        if (t > temp[i]){
                             //注意假设[0,i-1]都是有序(降序)的，如果待插入的元素比temp[i-1]还小则无需再与[i-1]前面的元素比较了，
                             //反之则进入if语句
                             int j;
@@ -48,10 +48,6 @@ public class GroupTopN_v2 {
                             }
                             temp[j+1] = t;//把待排序的元素t插入腾出的位置(j+1)
                             break;
-                        }else {
-                            if (t > temp[0]){
-                                temp[0] = t;
-                            }
                         }
                     }
                 }
