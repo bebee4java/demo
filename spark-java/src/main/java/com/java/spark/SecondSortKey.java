@@ -1,4 +1,4 @@
-package com.java.spark.operator;
+package com.java.spark;
 
 import scala.math.Ordered;
 

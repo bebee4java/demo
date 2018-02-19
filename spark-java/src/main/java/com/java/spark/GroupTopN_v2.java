@@ -30,6 +30,7 @@ public class GroupTopN_v2 {
         );
         final int topN = 2;
         JavaPairRDD<String, Integer> javaPairRDD = sparkContext.parallelizePairs(list);
+        //采用插入排序，固定topN大小数组，从而处理大量数据，占用固定空间
         javaPairRDD.groupByKey().mapToPair(new PairFunction<Tuple2<String,Iterable<Integer>>, String, Iterable<Integer>>() {
             @Override
             public Tuple2<String, Iterable<Integer>> call(Tuple2<String, Iterable<Integer>> tuple2) throws Exception {

@@ -1,6 +1,5 @@
 package com.java.spark;
 
-import com.java.spark.operator.SecondSortKey;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
