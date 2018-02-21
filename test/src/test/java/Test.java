@@ -13,5 +13,11 @@ public class Test {
         Object o = "s";
         System.out.println();
 
+        int i = Integer.MIN_VALUE;
+        int i1 = -2147483648;
+        int i2 = 2147483647;
+        System.out.println(i);
+        System.out.println(i1 - 1);
+        System.out.println(i2 + 1);
     }
 }

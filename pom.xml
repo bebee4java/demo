@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.0</version>
+            <version>3.5</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -79,6 +79,15 @@
             <url>http://central.maven.org/maven2</url>
         </repository>
         <repository>
+            <id>maven2</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo2.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>maven</id>
             <name>maven</name>
             <releases>
@@ -87,8 +96,8 @@
             <url>http://mvnrepository.com/artifact/</url>
         </repository>
         <repository>
-            <id>maven2</id>
-            <name>maven2</name>
+            <id>jboss</id>
+            <name>jboss</name>
             <releases>
                 <enabled>true</enabled>
             </releases>
