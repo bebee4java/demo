@@ -10,6 +10,26 @@ import java.io.File;
  * Created by sgr on 2018/2/26/026.
  */
 public class HiveDataSource {
+    /**
+     * 该代码本地不能运行，需要打包在服务器上跑：
+     * 1.将hive里的hive-site.xml放到spark/conf/目录下
+     * 2.启动hive：先启动mysql 然后启动hdfs
+     * 3.打包运行
+     * 如果你所在的客户端没有把hive-site.xml发送到每台spark的conf目录下，就必须通过--files ./conf/hive-site.xml指定
+     *
+     * 1.standalone模式：
+     * ./bin/spark-submit -master spark://node1:7077 --class com.java.spark.sql.HiveDataSource sparksqlhivedatasource.jar
+     * 2.standalone cluster模式:
+     * ./bin/spark-submit -master spark://node1:7077 --deploy-mode cluster --class com.java.spark.sql.HiveDataSource
+     * --files ./conf/hive-site.xml hdfs://node1:8020/sparksqlhivedatasource.jar
+     * 3.yarn-client模式：
+     * ./bin/spark-submit --master yarn-client --class com.java.spark.sql.HiveDataSource sparksqlhivedatasource.jar
+     * 4.yarn-cluster模式：
+     * 如果报：java.lang.ClassNotFoundException: org.datanucleus.api.jdo.JDOPersistenceManagerFactory 通过--jars 指定jar包运行
+     * ./bin/spark-submit --master yarn-cluster --class com.java.spark.sql.HiveDataSource
+     * --jars ./lib/datanucleus-api-jdo-3.2.1.jar,./lib/datanucleus-core-3.2.2.jar,./lib/datanucleus-rdbms-3.2.1.jar
+     * --files ./conf/hive-site.xml sparksqlhivedatasource.jar
+     */
     public static void main(String[] args) {
         String warehouseLocation = new File("spark-warehouse").getAbsolutePath();
         SparkSession spark = SparkSession
