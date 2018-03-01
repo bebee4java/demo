@@ -43,7 +43,7 @@ public class HiveDataSource {
         //判断如果表不存在则创建
         spark.sql("CREATE TABLE IF NOT EXISTS student_info(NAME STRING , AGE INT)");
         //加载数据
-        spark.sql("LOAD DATA LOCAL INPATH '/opt/data/student_info.txt' INTO student_info");
+        spark.sql("LOAD DATA LOCAL INPATH '/opt/data/student_info.txt' INTO TABLE student_info");
 
         spark.sql("DROP TABLE IF EXISTS student_score");
         spark.sql("CREATE TABLE IF NOT EXISTS student_score(NAME STRING , SCORE INT)");
