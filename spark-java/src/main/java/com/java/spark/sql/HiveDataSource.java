@@ -57,7 +57,7 @@ public class HiveDataSource {
 
         //读取hive表
         Dataset<Row> result = spark.table("good_student_info");
-        Row[] rows = result.collect();
+        Row[] rows = (Row[]) result.collect();
         for (Row row :rows){
             System.out.println(row);
         }
