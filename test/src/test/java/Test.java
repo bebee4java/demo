@@ -1,8 +1,13 @@
+import java.util.HashMap;
+
 /**
  * Created by sgr on 2017/9/26.
  */
 public class Test {
+    private int i = 0;
     public static void main(String[] args) {
+        Test t = new Test();
+        System.out.println(t.i);
         System.out.println(" ".matches("(^[ ]*)"));
         System.out.println("3".hashCode());
 
@@ -19,5 +24,17 @@ public class Test {
         System.out.println(i);
         System.out.println(i1 - 1);
         System.out.println(i2 + 1);
+        HashMap hashMap = new HashMap();
+        hashMap.put('s','s');
+        System.out.println(hashMap.put('s','a'));
+        System.out.println(1 << 4);
+        int i3 = 1 << 30;
+        int[] a = {1,3};
+        System.out.println(i3);
+
+
+
+        System.out.println("b"+10);
+        System.out.println('b'+10);
     }
 }

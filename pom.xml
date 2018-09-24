@@ -15,6 +15,8 @@
         <module>spark-java</module>
         <module>spark-scala</module>
         <module>spark-py</module>
+        <module>flink-java</module>
+        <module>flink-scala</module>
     </modules>
 
     <dependencies>
