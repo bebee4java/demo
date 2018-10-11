@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by sgr on 2017/9/26.
@@ -32,6 +33,10 @@ public class Test {
         int[] a = {1,3};
         System.out.println(i3);
 
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("a", "1");
+        String a1 = map.get("1");
+        System.out.println(a1);
 
 
         System.out.println("b"+10);
